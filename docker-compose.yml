@@ -1,0 +1,17 @@
+services:
+  vulndesk:
+    build: .
+    image: vulndesk:1.0.0
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: "3000"
+      VULNDESK_DB: /data/vulndesk.sqlite
+      # Set to "1" when serving behind HTTPS so session cookies get Secure.
+      VULNDESK_SECURE_COOKIES: "0"
+    volumes:
+      - vulndesk-data:/data
+    restart: unless-stopped
+
+volumes:
+  vulndesk-data:
